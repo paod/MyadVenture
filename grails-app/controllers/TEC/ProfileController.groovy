@@ -220,8 +220,10 @@ class ProfileController {
         }
         def specCount = specList.size()	
 	//-----------
+        println specList
         
         //roles
+        /*
         def roleCriteria = Role.createCriteria()
         def roleList = roleCriteria.list() {
             createAlias('ventures', 'v')
@@ -234,14 +236,29 @@ class ProfileController {
                 count('v.id')
             }
             eq("owner.id", id)
+            order("v.name", "asc")
 	}
-        def roleCount = roleList.size()
+        */
+        
+        def ventureCriteria = Profile.createCriteria()
+        def ventureList = ventureCriteria.list{
+            ventures {
+                eq("admin.id",session?.user?.id)
+            }
+        }
+        def ventureCount = ventureList.size()
+        println "Results: "
+        println ventureList
+        println ventureCount
+        //println roleList
+        println "HELLO THERE"
+        //def roleCount = roleList.size()
         
         
         def db = new Sql(dataSource)
         def connectionRequests = db.executeQuery("SELECT * FROM profile p JOIN connection_request c ON p.id=c.from_id WHERE c.to_id="+userInstance?.id)
         
-        render(view: "page", model: [connected: isConnected,roles:roleList,roleCount:roleCount,blogs: blogList, blogCount: blogCount, skills: skillList, skillCount: skillCount, specializations: specList, specCount: specCount, connectionRequests: connectionRequests, profileInstance: profileInstance])		
+        render(view: "page", model: [connected: isConnected,ventures:ventureList,ventureCount:ventureCount,blogs: blogList, blogCount: blogCount, skills: skillList, skillCount: skillCount, specializations: specList, specCount: specCount, connectionRequests: connectionRequests, profileInstance: profileInstance])		
     }
 
     def edit() {

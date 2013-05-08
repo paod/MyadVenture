@@ -308,7 +308,7 @@ $(document).ready(function() {
         <div class="well well-large">
           <h4>Ventures</h4>
           <hr/>
-          <g:if test="${roles}">
+          <g:if test="${ventures}">
             <br/><div style="height:200px; overflow-y:scroll;">
             <table class="table table-condensed" >
               <thead>
@@ -316,18 +316,12 @@ $(document).ready(function() {
                 <tr>&nbsp;</tr>
               </thead>
               <tbody>
-              <g:each in="${roles}">
+              <g:each in="${ventures}">
                 <tr>
                   <td>
-                    <g:if test="${session?. user?.id == profileInstance?.id}">
-                      <g:link controller="specialization" class="specialization_show" title="Proficiency: ${it[3]} | Experience: ${it[2]} years" action="edit" id="${it[0]}">${it[1]}</g:link>
-                    </g:if>
-                    <g:else>
-                      <g:link class="specialization_show" title="Proficiency: ${it[3]} | Experience: ${it[2]} years">${it[1]}</g:link>
-                    </g:else>  <!--<g:link controller="specialization" class="specialization_show" title="Proficiency: ${it[3]} | Experience: ${it[2]} years" action="show" id="${it[0]}">${it[1]}</g:link>-->
+                    
                   </td>
                   <td>
-                    <g:if test="${session?.user?.id == profileInstance?.id}"><g:link controller="specialization" onclick="return confirm('Do you want to delete this specialization?');" action="delete" class="specialization_delete" class="btn" id="${it[0]}">X</g:link></g:if>
                   </td>
                 </tr>
               </g:each>
@@ -342,13 +336,12 @@ $(document).ready(function() {
           
           
           <!-- For each venture -->
-          <g:if test="${roles}">
-            <g:each in="${roles}">
+          <g:if test="${ventures}">
+            <g:each in="${ventures}">
               <div class="media-body">
                 <a class="pull-left" href="#">
                   <img class="media-object" src="http://localhost:8081/uploads/no-pic-avatar.jpg" width="64px" height="64px"/>
                 </a>
-                <h4 class="media-heading"> <g:link controller="venture" action="show" id="${it.id}">${it.name}</g:link></h4>
                 <div class="media"><small></small></div>
               </div>
             </g:each>

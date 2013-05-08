@@ -37,7 +37,7 @@ class VentureController {
     def create() {
         [ventureInstance: new Venture(params)]
     }
-
+    
     def save() {
         def ventureInstance = new Venture(params)
         ventureInstance.admin = session?.user
@@ -56,7 +56,7 @@ class VentureController {
 
         if (!ventureInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'venture.label', default: 'Venture'), id])
-            redirect(action: "create")
+            redirect(action: "create", params: params)
             return
         }
 

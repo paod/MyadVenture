@@ -14,7 +14,7 @@ class Profile {
         boolean hasAvatar=0
 	boolean suspended = 0
 
-	static hasMany = [connections:Profile, blogs:Blog, skillsets:Skillset, specializations:Specialization]
+	static hasMany = [connections:Profile, blogs:Blog, skillsets:Skillset, specializations:Specialization, ventures:Venture]
 
 	static constraints = {
                 personalWebpage(nullable:true,url:true)
